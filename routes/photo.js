@@ -1,6 +1,6 @@
 var express = require('express'),
     router = express.Router(),
-    TITLE_PHOTO = 'Login',
+    TITLE_PHOTO = 'Photo',
     pageSize = 3,
     current = 1,
     FilesOnServer = require('../models/FilesOnServer.js'),
