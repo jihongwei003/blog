@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css"/>
+
+    <script src="/javascripts/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <script src="/javascripts/bootstrap.min.js" type="text/javascript"></script>
+
+    <style type="text/css">
+        #primaryPanel, #pagination {
+            margin-left: 110px;
+            margin-right: 110px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function confirmDelete() {
+            event.returnValue = confirm("删除是不可恢复的，你确认要删除吗？");
+        }
+
+        function showPic(path) {
+            $("#view_img").attr("src", path);
+            $("#down_link_id").attr("href", "/photo/download?path=" + path);
+        }
+
+        $(document).ready(function () {
+            if (!$("#pagination")) {
+            } else {
+                var dataCount = parseInt(<%= locals.dataCount %>);
+                var pagesize = parseInt(<%= locals.pagesize %>);
+                var currentpage = parseInt(<%= locals.currentpage %>);
+                var counts, pagehtml = "";
+                if (dataCount % pagesize == 0) {
+                    counts = parseInt(dataCount / pagesize);
+                } else {
+                    counts = parseInt(dataCount / pagesize) + 1;
+                }
+                //只有一页内容
+                if (dataCount
+                        <= pagesize) {
+                    pagehtml = "";
+                }
+                //大于一页内容
+                if (dataCount > pagesize) {
+                    if (currentpage > 1) {
+                        pagehtml += '<li><a href="/photo?page=' + (currentpage - 1) + '">上一页</a></li>';
+                    }
+                    for (var i = 0; i < counts; i++) {
+                        if (i >= (currentpage - 3) && i < (currentpage + 3)) {
+                            if (i == currentpage - 1) {
+                                pagehtml += '<li class="active"><a href="/photo?page=' + (i + 1) + '">' + (i + 1) + '</a></li>';
+                            } else {
+                                pagehtml += '<li><a href="/photo?page=' + (i + 1) + '">' + (i + 1) + '</a></li>';
+                            }
+                        }
+                    }
+                    if (currentpage < counts) {
+                        pagehtml += '<li><a href="/photo?page=' + (currentpage + 1) + '">下一页</a></li>';
+                    }
+                }
+                $("#pagination").html(pagehtml);
+            }
+        });
+
+        $(function () {
+            $('#uploadBtn').on('click', function () {
+                var tmp = document.getElementById("file").value;
+                var fileType = tmp.substring(tmp.lastIndexOf('.') + 1, tmp.length).toLowerCase();
+                if (fileType == "") {
+                    alert("您还没有选择图片！");
+                    return false;
+                }
+                var suppotFile = new Array();
+                suppotFile[0] = "jpg";
+                suppotFile[1] = "gif";
+                suppotFile[2] = "bmp";
+                suppotFile[3] = "png";
+                suppotFile[4] = "jpeg";
+                for (var i = 0; i < suppotFile.length; i++) {
+                    if (suppotFile[i] == fileType) {
+                        return true;
+                    } else {
+                        continue;
+                    }
+                }
+                alert("文件类型不合法,只能是 jpg、gif、bmp、png、jpeg 类型！");
+                return false;
+            })
+        });
+
+    </script>
+
+</head>
+<body>
+
+<% include template_header.ejs %>
+
+<% if (locals.success) { %>
+<div id="alt_success" class="alert alert-success">
+    <%- success %>
+</div>
+<% } %>
+
+<% if (locals.error) { %>
+<div id="alt_warning" class="alert alert-warning">
+    <%= error %>
+</div>
+<% } %>
+
+<% if (locals.username) { %>
+<button class="btn btn-primary" data-toggle="modal" data-target="#myModal"
+        style="margin-left: 100px;margin-bottom: 20px">
+    upload photoes
+</button>
+<% } %>
+
+<div class="panel panel-primary" id="primaryPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Photos</h3>
+    </div>
+
+    <div class="panel-body">
+
+        <% if (locals.allPhotoes) { %>
+        <% for(var i = 0; i < allPhotoes.length; i++) { %>
+
+        <a data-toggle="modal" data-target="#myModal1" onclick="showPic('<%= allPhotoes[i].path %>')"
+           href="/photo/view?path=<%= allPhotoes[i].path %>">
+            <img src=<%= allPhotoes[i].path %> width="170px" height="170px" class="img-circle"/>
+        </a>
+
+        (<%= allPhotoes[i].date %>)
+
+        <% if (locals.username) { %>
+        <a href="/photo/delete?path=<%= allPhotoes[i].path %>" onclick="confirmDelete()">delete</a>
+        <% } %>
+
+        <span class="glyphicon glyphicon-heart"></span> <%= allPhotoes[i].like %>
+        <a href="/photo/like?path=<%= allPhotoes[i].path %>">like</a>
+
+        <span class="glyphicon glyphicon-eye-open"></span> <%= allPhotoes[i].view %>
+        <a data-toggle="modal" data-target="#myModal1" onclick="showPic('<%= allPhotoes[i].path %>')"
+           href="/photo/view?path=<%= allPhotoes[i].path %>">view</a>
+        <br>
+        <hr style="color:#5599FF;"/>
+        <% } %>
+        <% } %>
+
+    </div>
+</div>
+
+<ul class="pagination" id="pagination"></ul>
+
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    View
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div style="text-align:center">
+                    <img id="view_img" src="" width="400px" height="400px" class="img-thumbnail"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="" id="down_link_id">download</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    shut
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    View
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-signin" role="form" method="post" enctype="multipart/form-data"
+                      action="/photo/upload">
+                    <input type="file" name="upload" multiple="multiple" id="file">
+                    <input type="submit" value="上传" id="uploadBtn" class="btn btn-default"/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    shut
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include template_footer_1.ejs %>
+
+</body>
+</html>
+

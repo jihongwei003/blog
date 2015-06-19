@@ -1,0 +1,77 @@
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+                <img src='files/photo.jpg' width="100px" height="100px" class="img-circle"/>
+                Jihongwei
+            </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+
+                <% if (locals.admin_key) { %>
+                <% if (locals.username) { %>
+                <li>
+                    <a href="#" style="color: rgb(212, 106, 64);">
+                        <span class="glyphicon glyphicon-user"></span> <%= username %>
+                    </a>
+                </li>
+                <li>
+                    <a href="/logout" style="color: rgb(212, 106, 64);">
+                        <span class="glyphicon glyphicon-log-out"></span> logout
+                    </a>
+                </li>
+                <% }else { %>
+                <li>
+                    <a href="/login" style="color: rgb(212, 106, 64);">
+                        <span class="glyphicon glyphicon-log-in"></span> login
+                    </a>
+                </li>
+                <li>
+                    <a href="/reg" style="color: rgb(212, 106, 64);">
+                        register
+                    </a>
+                </li>
+                <% } %>
+                <% } %>
+            </ul>
+        </div>
+
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">HOME</a>
+            </div>
+
+            <div>
+                <ul class="nav navbar-nav" id="navigationBar">
+                    <li><a class="navbar-brand" href="/about">ABOUT</a></li>
+                    <li><a class="navbar-brand" href="/photo">PHOTO</a></li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            ARTICLES<b class="caret"></b>
+                        </a>
+
+                        <ul class="dropdown-menu">
+
+                            <% if (locals.username) { %>
+                            <li>
+                                <a href="/edit_article">NEW</a>
+                            </li>
+                            <li>
+                                <a href="/draft">DRAFT</a>
+                            </li>
+                            <% } %>
+
+                            <li>
+                                <a href="/article">PUBLISHED</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="navbar-brand" href="/message">MESSAGE</a></li>
+                </ul>
+            </div>
+        </nav>
+
+    </div>
+</div>
+
