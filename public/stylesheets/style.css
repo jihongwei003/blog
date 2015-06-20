@@ -132,7 +132,55 @@
 
 /*template_footer1.ejs*/
 
+.template_footer div {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
 .template_footer p {
     display: inline;
 }
 
+/*template_right*/
+
+.template_right div h4,
+.template_right div h6 a {
+    color: #556a7f;
+}
+
+.template_right div h6 {
+    padding-top: 10px;
+}
+
+.template_right div h6 a:hover {
+    color: #D46A40;
+}
+
+.template_right > div {
+    margin-top: 50px;
+}
+
+/*photo.ejs*/
+
+.photo_album ul li {
+    display: inline;
+
+}
+
+.upload_photo_btn{
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+.photo_album ul li div{
+    display: inline;
+    margin-left: 35px;
+    margin-right: 35px;
+}
+
+#pagination {
+    margin-left: 190px;
+    margin-right: 190px;
+}

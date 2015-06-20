@@ -1,7 +1,7 @@
 var express = require('express'),
     router = express.Router(),
     TITLE_PHOTO = 'Photo',
-    pageSize = 3,
+    pageSize = 9,
     current = 1,
     FilesOnServer = require('../models/FilesOnServer.js'),
     Picture = require('../models/Picture.js'),
