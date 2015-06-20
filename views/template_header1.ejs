@@ -1,0 +1,49 @@
+<div class="template_header">
+    <div class="container template_header_container">
+
+        <div class="template_header_logo" id="header_logo">
+            <a class="navbar-brand" href="/">
+                <img src='files/photo.jpg' class="img-circle"/>
+            </a>
+            <a class="navbar-brand" href="/">
+                <h1>Jihongwei</h1>
+                <div>————Knowledge makes humble, ignorance makes proud.</div>
+            </a>
+        </div>
+
+        <div class="template_header_right">
+            <ul>
+                <% if (locals.admin_key) { %>
+                <% if (locals.username) { %>
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> <%= username %></a></li>
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> logout</a></li>
+                <% }else { %>
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> login</a></li>
+                <li><a href="/reg">register</a></li>
+                <% } %>
+                <% } %>
+            </ul>
+        </div>
+
+        <div class="template_header_nav">
+            <ul>
+                <li class="active"><a href="/">HOME</a></li>
+                <li><a href="/about">ABOUT</a></li>
+                <li><a href="/photo">PHOTO</a></li>
+                <li style="position: relative">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">ARTICLES<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <% if (locals.username) { %>
+                        <li><a href="/edit_article">NEW</a></li>
+                        <li><a href="/draft">DRAFT</a></li>
+                        <% } %>
+                        <li><a href="/article">PUBLISHED</a></li>
+                    </ul>
+                </li>
+                <li><a href="/message">MESSAGE</a></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+

@@ -1,3 +1,138 @@
-.banner{
-    background:#556a7f;
+/*template_header1.ejs*/
+
+.template_header {
+    background: #556a7f;
 }
+
+.template_header_logo {
+    clear: both;
+    overflow: hidden;
+    padding: 1em 0;
+    border-bottom: 1px solid #6f879a;
+}
+
+.template_header_logo a img {
+    width: 100px;
+    height: 100px;
+    border: 5px solid #464863;
+}
+
+.template_header_logo a h1 {
+    display: inline;
+    color: #D46A40;
+    padding-left: 20px;
+    position: relative;
+    top: 30px;
+}
+
+/***************************/
+
+.template_header_logo > a > div {
+    color: #556a7f;
+    margin-top: 20px;
+    margin-left: 40px;
+    transition: margin-top 0.5s, color 1s;
+}
+
+.template_header_logo > a > div:hover {
+    color: #D46A40;
+    margin-top: 40px;
+}
+
+.template_header_logo > a > img {
+    animation-name: myfirst;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    animation-play-state: running;
+}
+
+@keyframes myfirst {
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/***************************/
+
+.template_header_container {
+    position: relative;
+}
+
+.template_header_right {
+    position: absolute;
+    top: 40px;
+    left: auto;
+    right: 10px;
+}
+
+.template_header_right ul li {
+    display: inline;
+}
+
+.template_header_right ul li a {
+    color: #D46A40;
+    margin: 0 .5em;
+}
+
+/***************************/
+
+.template_header_nav {
+    padding: 1em 0;
+}
+
+.template_header_nav ul {
+    padding: 0;
+    margin: 0;
+}
+
+.template_header_nav ul li {
+    display: inline-block;
+    margin: 0 .5em;
+    outline: none;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.template_header_nav ul li a {
+    position: relative;
+    display: inline-block;
+    outline: none;
+    color: #8ca9b9;
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-weight: 500;
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
+    font-size: 1em;
+    margin: 0.8em 1.3em;
+}
+
+.template_header_nav ul li a:hover,
+.template_header_nav ul li.active a {
+    color: #fff;
+}
+
+.template_header_nav > ul > li > ul {
+    position: absolute;
+    margin-top: 15px;
+    left: -25px
+}
+
+.template_header_nav > ul > li > ul > li > a:hover {
+    color: #D46A40;
+    background-color: #ffffff;
+}
+
+/*template_footer1.ejs*/
+
+.template_footer p {
+    display: inline;
+}
+
