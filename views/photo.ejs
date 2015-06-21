@@ -112,6 +112,7 @@
 <% } %>
 
 <div class="container photo_album">
+    <h2>Photos</h2>
     <ul>
         <% if (locals.allPhotoes) { %>
         <% for(var i = 0; i < allPhotoes.length; i++) { %>
@@ -119,7 +120,7 @@
         <li>
             <div class="col-md-3">
                 <div class="photo_container">
-                    <h2>Photo Title</h2>
+                    <h3>Photo Title</h3>
 
                     <p class="adm">Posted <%= allPhotoes[i].date %></p>
 
@@ -147,9 +148,8 @@
         <% } %>
         <% } %>
     </ul>
+    <ul class="pagination" id="pagination"></ul>
 </div>
-
-<ul class="pagination" id="pagination"></ul>
 
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">

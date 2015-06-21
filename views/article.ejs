@@ -19,7 +19,7 @@
 
         function updateView(date) {
             var request = new XMLHttpRequest();
-            request.open("GET", "/article_detail/view?create_date="+ date);
+            request.open("GET", "/article_detail/view?create_date=" + date);
             request.send();
         }
     </script>
@@ -41,26 +41,28 @@
 </div>
 <% } %>
 
-<div class="container">
+<div class="container article_container">
+    <h2>Articles</h2>
 
-    <div class="panel panel-primary" id="primaryPanel">
-        <div class="panel-heading">
-            <h3 class="panel-title">Articles</h3>
+    <% if (locals.articles) { %>
+    <% for(var i = 0; i < articles.length; i++) { %>
+    <div class="container article">
+        <div class="col-md-4 article-pic">
+            <img src="images/img11.jpg" class="img-responsive" alt=""/>
         </div>
-
-        <div class="panel-body">
-
-            <% if (locals.articles) { %>
-            <% for(var i = 0; i < articles.length; i++) { %>
-
+        <div class="col-md-8 article-into">
             <a href="/article_detail?create_date=<%= articles[i].create_date %>"
                onclick="updateView('<%= articles[i].create_date %>')">
                 <h3><%- articles[i].title %></h3>
             </a>
 
-            <%- articles[i].create_date %>
-            <br>
+            <p>posted <%- articles[i].create_date %></p>
 
+            <p>Some describe about this article.Some describe about this article.Some describe about this
+                article.Some
+                describe about this article.Some describe about this article.</p>
+            <a href="/article_detail?create_date=<%= articles[i].create_date %>"
+               onclick="updateView('<%= articles[i].create_date %>')">Read More</a>
             <span class="glyphicon glyphicon-heart"></span> <%= articles[i].like %>
             <a href="/article_detail/like?create_date=<%= articles[i].create_date %>">like</a>
 
@@ -69,16 +71,14 @@
                onclick="updateView('<%= articles[i].create_date %>')">view</a>
 
             <% if (locals.username) { %>
-            <a href="/article/delete?create_date=<%= articles[i].create_date %>" onclick="confirmDelete()">delete</a>
+            <a href="/article/delete?create_date=<%= articles[i].create_date %>"
+               onclick="confirmDelete()">delete</a>
             <br>
             <% } %>
-
-            <hr>
-            <% } %>
-            <% } %>
-
         </div>
     </div>
+    <% } %>
+    <% } %>
 </div>
 
 <% include template_footer_1.ejs %>
