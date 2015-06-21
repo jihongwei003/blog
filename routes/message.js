@@ -1,7 +1,7 @@
 var express = require('express'),
     router = express.Router(),
     TITLE_MESSAGE = 'Message',
-    pageSize = 3,
+    pageSize = 10,
     current = 1,
     Message = require('../models/Message.js'),
     moment = require("moment");

@@ -11,12 +11,15 @@
     <script src="/javascripts/jquery-2.1.1.min.js" type="text/javascript"></script>
     <script src="/javascripts/bootstrap.min.js" type="text/javascript"></script>
 
-    <style type="text/css">
-        #primaryPanel {
-            margin-left: 110px;
-            margin-right: 110px;
-        }
-    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#nav_home_id").attr("class", "");
+            $("#nav_about_id").attr("class", "active");
+            $("#nav_photo_id").attr("class", "");
+            $("#nav_article_id").attr("class", "");
+            $("#nav_message_id").attr("class", "");
+        });
+    </script>
 
 </head>
 <body>

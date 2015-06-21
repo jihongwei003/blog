@@ -35,15 +35,14 @@ Comment.prototype.save = function (callback) {
 }
 
 Comment.getCommentsByArticle = function (article, callback) {
-    var findStr = {
-        'article': article
-    };
-
     mongodb.connect(Con.get(), function (err, conn) {
+        var findStr = {
+            'article': article
+        };
         console.log('calling Comment.getCommentsByArticle()');
         var collection = conn.collection('comment');
 
-        collection.find().toArray(function (err, result) {
+        collection.find(findStr).toArray(function (err, result) {
             callback(err, result);
             conn.close();
         });
@@ -51,11 +50,10 @@ Comment.getCommentsByArticle = function (article, callback) {
 };
 
 Comment.deleteByDate = function (date, callback) {
-    var findStr = {
-        'date': date
-    };
-
     mongodb.connect(Con.get(), function (err, conn) {
+        var findStr = {
+            'date': date
+        };
         console.log('calling Comment.deleteByDate()');
         var collection = conn.collection('comment');
 

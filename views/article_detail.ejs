@@ -14,6 +14,14 @@
 
     <script type="text/javascript">
 
+        $(document).ready(function () {
+            $("#nav_home_id").attr("class", "");
+            $("#nav_about_id").attr("class", "");
+            $("#nav_photo_id").attr("class", "");
+            $("#nav_article_id").attr("class", "active");
+            $("#nav_message_id").attr("class", "");
+        });
+
         function reply(replyDate, replyTo) {
             $("#reply").val(replyDate);
             $("#content").val('(Reply to ' + replyTo + ':)');
@@ -49,61 +57,60 @@
 </div>
 <% } %>
 
-<div class="container">
-
+<div class="container detail_container">
     <h1><%= locals.article['title'] %></h1>
-    (<%= locals.article['create_date'] %>)
-    <hr>
-    <%- locals.article['content'] %>
-    <hr>
+    <p>posted <%= locals.article['create_date'] %></p>
+    <div class="detail_content">
+        <p><%- locals.article['content'] %></p>
+    </div>
 
     <% if (locals.username) { %>
-    <a href="/edit_article?create_date=<%= locals.article['create_date'] %>">edit</a>
+    <a href="/edit_article?create_date=<%= locals.article['create_date'] %>">Edit</a>
 
     <% if(locals.article['publish_date'] == null){ %>
-    <a href="/draft/publish?create_date=<%= locals.article['create_date'] %>">publish</a>
+    <a href="/draft/publish?create_date=<%= locals.article['create_date'] %>">Publish</a>
     <% } %>
     <% } %>
 
     <% if(locals.article['publish_date'] != null){ %>
-    <div class="panel panel-primary" id="primaryPanel">
-        <div class="panel-heading">
-            <h3 class="panel-title">Replies</h3>
-        </div>
-
-        <div class="panel-body">
-            <div style="text-align: right">
-                <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal"
-                   onclick="reply('#','author')">Submit Reply</a>
-                <br>
-            </div>
-
-            <% if (locals.comments) { %>
-            <% for(var i = 0; i < comments.length; i++) { %>
-            <h4>Name: <%= comments[i].nickname %>(<%= comments[i].email %>)</h4>
-            Date: <%= comments[i].date %><br>
-            Content: <%= comments[i].content %><br>
-
-            <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal"
-               onclick="reply('<%= comments[i].date %>','<%= comments[i].nickname %>')">reply</a>
-            <% if (locals.username) { %>
-            <a href="/comment/delete?date=<%= comments[i].date %>&article=<%= locals.article['create_date'] %>">
-                delete
-            </a>
-            <% } %>
-            <br>
-
-            <hr>
-            <% } %>
-            <% } %>
-
-        </div>
+    <div>
+        <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal"
+           onclick="reply('#','author')">Reply</a>
     </div>
+
+    <ul class="message_list">
+        <% if (locals.comments) { %>
+        <% for(var i = 0; i < comments.length; i++) { %>
+        <li>
+            <div class="message_box">
+                <div class="triangle_icon"></DIV>
+                <div class="circle_icon"></DIV>
+                <h3><a href="<%= comments[i].website %>"><%= comments[i].nickname %>(<%= comments[i].email %>)</a>
+                </h3>
+                <ul class="message_info">
+                    <p><%= comments[i].content %></P>
+                </ul>
+                <ul class="message_footer">
+                    <li class="message_delete">
+                        <% if (locals.username) { %>
+                        <a href="/comment/delete?date=<%= comments[i].date %>&article=<%= locals.article['create_date'] %>">
+                            delete
+                        </a>
+                        <% } %>
+                    </li>
+                    <li class="message_reply">
+                        <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal"
+                           onclick="reply('<%= comments[i].date %>','<%= comments[i].nickname %>')">Reply</a>
+                    </li>
+                    <li class="message_time"><%= comments[i].date %></LI>
+                </ul>
+            </div>
+        </li>
+        <% } %>
+        <% } %>
+    </ul>
     <% } %>
-
 </div>
-
-<% include template_footer_1.ejs %>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -138,6 +145,8 @@
         </div>
     </div>
 </div>
+
+<% include template_footer_1.ejs %>
 
 </body>
 </html>

@@ -13,6 +13,14 @@
     <script src="/javascripts/bootstrap.min.js"></script>
 
     <script type="text/javascript">
+        $(document).ready(function () {
+            $("#nav_home_id").attr("class", "");
+            $("#nav_about_id").attr("class", "");
+            $("#nav_photo_id").attr("class", "");
+            $("#nav_article_id").attr("class", "active");
+            $("#nav_message_id").attr("class", "");
+        });
+
         function confirmDelete() {
             event.returnValue = confirm("删除是不可恢复的，你确认要删除吗？");
         }

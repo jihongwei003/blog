@@ -121,7 +121,7 @@ body {
 }
 
 .template_header_nav ul li a:hover,
-.template_header_nav ul li.active a {
+.template_header_nav > ul > li.active > a {
     color: #fff;
 }
 
@@ -246,7 +246,7 @@ body {
 .message_container > div > a:hover {
     text-decoration: none;
     color: #D46A40;
-    font-size: 200%;
+    /*font-size: 200%;*/
 }
 
 .triangle_icon {
@@ -344,4 +344,33 @@ body {
 .message_time {
     background-position: 0px -208px;
     padding: 0px 0px 0px 18px;
+}
+
+/*article_detail.ejs*/
+
+.detail_container > h1,
+.detail_container > p {
+    color: #556a7f;
+    text-align: center;
+}
+
+.detail_container > a {
+    font-size: 150%;
+}
+
+.detail_container > div > a {
+    font-size: 150%;
+    color: #D46A40;
+    float: right;
+}
+
+.detail_container > div > a:hover {
+    text-decoration: none;
+}
+
+.detail_content {
+    background-color: #ffffff;
+    box-shadow: 0px 1px 5px -1px rgba(104, 123, 144, 0.31);
+    border-radius: 0.3em;
+    padding: 20px 20px;
 }

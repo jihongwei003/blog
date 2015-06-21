@@ -7,6 +7,7 @@
             </a>
             <a class="navbar-brand" href="/">
                 <h1>Jihongwei</h1>
+
                 <div>——Knowledge makes humble, ignorance makes proud.</div>
             </a>
         </div>
@@ -27,20 +28,20 @@
 
         <div class="template_header_nav">
             <ul>
-                <li class="active"><a href="/">HOME</a></li>
-                <li><a href="/about">ABOUT</a></li>
-                <li><a href="/photo">PHOTO</a></li>
-                <li style="position: relative">
+                <li id="nav_home_id" class="active"><a href="/" onclick="chargeActive('nav_home_id')">HOME</a></li>
+                <li id="nav_about_id" class=""><a href="/about" onclick="chargeActive('nav_about_id')">ABOUT</a></li>
+                <li id="nav_photo_id"><a href="/photo" onclick="chargeActive('nav_photo_id')">PHOTOS</a></li>
+                <li id="nav_article_id" style="position: relative" onclick="chargeActive('nav_article_id')">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">ARTICLES<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <% if (locals.username) { %>
                         <li><a href="/edit_article">NEW</a></li>
-                        <li><a href="/draft">DRAFT</a></li>
+                        <li><a href="/draft">DRAFTS</a></li>
                         <% } %>
                         <li><a href="/article">PUBLISHED</a></li>
                     </ul>
                 </li>
-                <li><a href="/message">MESSAGE</a></li>
+                <li id="nav_message_id"><a href="/message" onclick="chargeActive('nav_message_id')">MESSAGES</a></li>
             </ul>
         </div>
 

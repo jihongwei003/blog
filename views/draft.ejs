@@ -13,6 +13,14 @@
     <script src="/javascripts/bootstrap.min.js"></script>
 
     <script type="text/javascript">
+        $(document).ready(function () {
+            $("#nav_home_id").attr("class", "");
+            $("#nav_about_id").attr("class", "");
+            $("#nav_photo_id").attr("class", "");
+            $("#nav_article_id").attr("class", "active");
+            $("#nav_message_id").attr("class", "");
+        });
+
         function confirmDelete() {
             event.returnValue = confirm("删除是不可恢复的，你确认要删除吗？");
         }
@@ -35,37 +43,30 @@
 </div>
 <% } %>
 
-<div class="container">
+<div class="container article_container">
+    <h2>Drafts</h2>
 
-    <div class="panel panel-primary" id="primaryPanel">
-        <div class="panel-heading">
-            <h3 class="panel-title">Drafts</h3>
+    <% if (locals.articles) { %>
+    <% for(var i = 0; i < articles.length; i++) { %>
+    <div class="container article">
+        <div class="col-md-4 article-pic">
+            <img src="images/img11.jpg" class="img-responsive" alt=""/>
         </div>
-
-        <div class="panel-body">
-
-            <% if (locals.articles) { %>
-            <% for(var i = 0; i < articles.length; i++) { %>
-
-            <h3>Title: <%= articles[i].title %></h3>
-            Date: <%= articles[i].create_date %><br>
-
-            <a href="/article_detail?create_date=<%= articles[i].create_date %>">view</a>
-            <a href="/draft/delete?create_date=<%= articles[i].create_date %>" onclick="confirmDelete()">delete</a>
-            <br>
-            <hr>
-
-            <% } %>
-            <% } %>
-
+        <div class="col-md-8 article-into">
+            <a href="/article_detail?create_date=<%= articles[i].create_date %>"
+               onclick="updateView('<%= articles[i].create_date %>')"><h3><%- articles[i].title %></h3></a>
+            <p>created <%- articles[i].create_date %></p>
+            <p>Some describe about this article.Some describe about this article.Some describe about this
+                article.Some
+                describe about this article.Some describe about this article.</p>
+            <a href="/article_detail?create_date=<%= articles[i].create_date %>"
+               onclick="updateView('<%= articles[i].create_date %>')">Read More</a>
+            <a href="/draft/delete?create_date=<%= articles[i].create_date %>"
+               onclick="confirmDelete()">delete</a>
         </div>
     </div>
-
-
-</div>
-
-<div class="container">
-
+    <% } %>
+    <% } %>
 
 </div>
 
